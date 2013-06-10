@@ -196,6 +196,8 @@ static const NSUInteger kFirstTableSection = 0;
     TTTableLinkedItem* item = object;
     if (item.accessoryURL && [_controller shouldOpenURL:item.accessoryURL]) {
       TTOpenURLFromView(item.accessoryURL, tableView);
+    } else if ([_controller respondsToSelector:@selector(didAccessoryButtonTapped:atIndexPath:)]) {
+        [_controller didAccessoryButtonTapped:item atIndexPath:indexPath];
     }
   }
 }

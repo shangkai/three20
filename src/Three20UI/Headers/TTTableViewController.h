@@ -128,6 +128,7 @@
  */
 - (void)didSelectObject:(id)object atIndexPath:(NSIndexPath*)indexPath;
 
+-(void)didAccessoryButtonTapped:(id)object atIndexPath:(NSIndexPath*)indexPath;
 /**
  * Asks if a URL from that user touched in the table should be opened.
  */
