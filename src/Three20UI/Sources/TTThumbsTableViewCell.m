@@ -75,7 +75,7 @@ static const CGFloat kDefaultThumbSize = 75.0f;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)assignPhotoAtIndex:(int)photoIndex toView:(TTThumbView*)thumbView {
-  id<TTPhoto> photo = [_photo.photoSource photoAtIndex:photoIndex];
+  id<TTPhoto> photo = [_photo.photoSource ttPhotoAtIndex:photoIndex];
   if (photo) {
     thumbView.thumbURL = [photo URLForVersion:TTPhotoVersionThumbnail];
     thumbView.hidden = NO;
@@ -90,9 +90,9 @@ static const CGFloat kDefaultThumbSize = 75.0f;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)thumbTouched:(TTThumbView*)thumbView {
   NSUInteger thumbViewIndex = [_thumbViews indexOfObject:thumbView];
-  NSInteger offsetIndex = _photo.index + thumbViewIndex;
+  NSInteger offsetIndex = _photo.ttIndex + thumbViewIndex;
 
-  id<TTPhoto> photo = [_photo.photoSource photoAtIndex:offsetIndex];
+  id<TTPhoto> photo = [_photo.photoSource ttPhotoAtIndex:offsetIndex];
   [_delegate thumbsTableViewCell:self didSelectPhoto:photo];
 }
 
@@ -177,7 +177,7 @@ static const CGFloat kDefaultThumbSize = 75.0f;
       [self.contentView addSubview:thumbView];
       [_thumbViews addObject:thumbView];
       if (_photo) {
-        [self assignPhotoAtIndex:_photo.index+i toView:thumbView];
+        [self assignPhotoAtIndex:_photo.ttIndex+i toView:thumbView];
       }
     }
   }
@@ -199,7 +199,7 @@ static const CGFloat kDefaultThumbSize = 75.0f;
 
     NSInteger i = 0;
     for (TTThumbView* thumbView in _thumbViews) {
-      [self assignPhotoAtIndex:_photo.index+i toView:thumbView];
+      [self assignPhotoAtIndex:_photo.ttIndex+i toView:thumbView];
       ++i;
     }
   }
