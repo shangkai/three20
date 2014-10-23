@@ -268,9 +268,21 @@ TT_FIX_CATEGORY_BUG(UIViewAdditions)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)setWidth:(CGFloat)width {
-  CGRect frame = self.frame;
-  frame.size.width = width;
-  self.frame = frame;
+    @try {
+        CGRect frame = self.frame;
+        CGFloat x = frame.origin.x;
+        CGFloat y = frame.origin.y;
+        CGFloat height = frame.size.height;
+        if (!isnan(width) && !isnan(x) && !isnan(y) && !isnan(height)){
+            self.frame = CGRectMake(x, y, width, height);
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"exception=%@",[exception reason]);
+    }
+    @finally {
+        //
+    }
 }
 
 
@@ -282,9 +294,21 @@ TT_FIX_CATEGORY_BUG(UIViewAdditions)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)setHeight:(CGFloat)height {
-  CGRect frame = self.frame;
-  frame.size.height = height;
-  self.frame = frame;
+    @try {
+        CGRect frame = self.frame;
+        CGFloat x = frame.origin.x;
+        CGFloat y = frame.origin.y;
+        CGFloat width = frame.size.width;
+        if (!isnan(height)&&!isnan(x)&&!isnan(y)&&!isnan(width)){
+            self.frame = CGRectMake(x, y, width, height);
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"exception=%@",[exception reason]);
+    }
+    @finally {
+        //
+    }
 }
 
 
